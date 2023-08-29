@@ -130,6 +130,11 @@ print_modname() {
 # Copy/extract your module files into $MODPATH in on_install.
 
 on_install() {
+  if ! [[ $ARCH = "arm64" ]]; then
+    ui_print "not_compatible, exiting"
+    exit 1
+  fi
+
   local TMPDIR="$MODPATH/tmp"
   ui_print "[0/7] Preparing module directory"
   mkdir -p "$TMPDIR"
